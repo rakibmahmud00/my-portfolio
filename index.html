@@ -938,7 +938,7 @@
                 </div>
 
                 <div class="form-area wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0">
-                    <form action="form-sub.html" name="contact-form" netlify>
+                    <form action="form-sub.html" name="contact-form" id="contact-form">
 
                         <div class="row-group">
                             <div class="form-floating">
@@ -1027,6 +1027,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/portfolio.js"></script>
+
+
+    <script>
+        const form = document.forms["contact-form"];
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+      
+          const formData = new FormData(form);
+          const scriptURL = "https://script.google.com/macros/s/AKfycbwrgDzgQ8gLoaB6w0ky8Z07V7D9UBqvLqHbbAHNfgVAfScMrsTV4LjpWCHCCx_AGSA/exec"; // Paste your deployed Google Script URL
+      
+          try {
+            // Send the form data to Google Script
+            await fetch(scriptURL, { method: "POST", body: formData });
+      
+            // Reset the form
+            form.reset();
+      
+            // Redirect to the "Thank You" page
+            window.location.href = "form-sub.html"; // Replace with your actual thank you page URL
+          } catch (error) {
+            alert("Failed to send message.");
+          }
+        });
+      </script>
+      
+      
 </body>
 
 </html>
